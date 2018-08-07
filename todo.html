@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <h1>To Do List</h1>
+    <style type='text/css'>
+        .strike-through {
+            text-decoration: line-through;
+        }
+
+        button {
+            border-radius: 6px;
+            padding: 6px 12px;
+            background: #2a2f57;
+            color: white;
+            border: none;
+        }
+
+        h1,
+        button,
+        p {
+            text-align: center;
+            font-family: Century Gothic;
+        }
+
+        table {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        div {
+            text-align: center;
+        }
+
+        body {
+            background: #595968;
+            
+        }
+
+        input{
+            border-radius: 6px;
+            border: none;
+            padding: 6px 12px;
+        }
+    </style>
+    <script>
+        let contador = 0;
+        function agregar(elemento) {
+            let table = document.getElementById('toDoList');
+            let row = table.insertRow(0);
+            let isDoneCell = row.insertCell(0);
+            isDoneCell.innerHTML = `<input type='checkbox' id='elemento_${contador}_checkbox' onclick="changeStatus('elemento_${contador}');">`
+            let contentCell = row.insertCell(1);
+            contentCell.innerHTML = `<p id='elemento_${contador}_p'> ${elemento} </p>`;
+            contador++;
+            document.getElementById('elemento').value = '';
+        }
+
+        function changeStatus(element) {
+            let checkbox = document.getElementById(`${element}_checkbox`);
+            let paragraph = document.getElementById(`${element}_p`);
+            if (checkbox.checked == true) {
+                paragraph.classList.add("strike-through");
+            } else {
+                paragraph.classList.remove("strike-through");
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div>
+        <input id="elemento" type="text" placeholder="Agregar Elemento Aqui">
+        <button onclick="agregar(document.getElementById('elemento').value);">Agregar</button>
+    </div>
+    <div>
+        <table id="toDoList">
+
+        </table>
+    </div>
+</body>
+
+</html>
